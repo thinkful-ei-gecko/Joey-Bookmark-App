@@ -31,9 +31,10 @@ let STORE =(function(){
         <a href="${bookmark.url}">Visit Website</a>
         <h5>Description:</h5>
         <p>${bookmark.desc}</p>
-        <button type="button" class="detailed-view-button">details</button>
+        <button type="submit" class="detailed-view-button">details</button>
         <button type="button" class="delete-button">delete</button>
-    </form>`;
+    </form>
+    </li>`;
   }
   return {
     items: [],

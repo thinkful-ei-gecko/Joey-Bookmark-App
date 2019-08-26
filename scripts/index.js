@@ -1,6 +1,6 @@
 'use strict';
 $(document).ready(function(){
-  
+  bookmarks.bindEvent();
   api.getItem()
     .then((items)=>{
       items.forEach( item => STORE.addItem(item));
@@ -8,12 +8,3 @@ $(document).ready(function(){
     });
 });
 
-function displayBookmarks(){
-  bookmarks.handleBookmarkCreate();
-  api.getItem()
-    .then(items => {
-      console.log(items);
-    });
-}
-
-$(displayBookmarks);
