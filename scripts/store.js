@@ -20,6 +20,9 @@ let STORE =(function(){
     }
     
   };
+  const setError = function(error) {
+    this.error=error;
+  };
   function generateItemElement(bookmark){
     return `<li class="js-bookmark-entry" bookmark-id=${bookmark.id}>
     <form class="js-bookmark-entry-form">
@@ -39,6 +42,7 @@ let STORE =(function(){
     findAndDelete,
     renderList,
     generateItemElement,
+    setError,
   };
 
 }())

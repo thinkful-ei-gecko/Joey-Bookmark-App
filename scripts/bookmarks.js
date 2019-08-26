@@ -29,6 +29,9 @@ const bookmarks = (function(){
               STORE.findAndDelete(id);
               STORE.renderList();
             }
+          })
+          .catch(err=>{
+            STORE.setError(err.message);
           });
       });
     }

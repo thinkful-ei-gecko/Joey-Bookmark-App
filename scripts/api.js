@@ -22,7 +22,6 @@ const api = (function () {
   
 
     return fetch(BASE_URL, {
-    
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -36,12 +35,11 @@ const api = (function () {
 
   
 
-  function deleteItem(id, updateData){
+  function deleteItem(id){
     return fetch(
       `${BASE_URL}/${id}`, 
       {method : 'DELETE', 
-        headers: {'Content-Type' : 'application/json'},
-        body: JSON.stringify(updateData)
+        
       });}
 
 
