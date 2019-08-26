@@ -1,28 +1,53 @@
 'use strict';
 /* global store, cuid */
-const api = (function(){
-  const url = 'https://thinkful-list-api.herokuapp.com/joey/bookmarks';
-  
-  const getBookmarks = function(){
-    return fetch(url);
-  };
-  const createBookmark = function(title, url){
-    let newBookmark= JSON.stringify({
-      id: cuid(),
+
+const api = (function () {
+
+  const BASE_URL = 'https://thinkful-list-api.herokuapp.com/joey/bookmarks';
+
+  function getItem() {
+    return fetch(`${BASE_URL}`)
+      .then(res => res.json());
+    
+
+  }
+
+  function createItem(title, url, desc = 'none', rating) {
+    const newItem = {
       title,
       url,
-    });
-    return fetch(url,{
+      desc,
+      rating
+    };
+  
+
+    return fetch(BASE_URL, {
+    
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: newBookmark
-    } );
-  };
-  const deleteBookmark = function(id){
-    return fetch(`${url}/${id}`, {
-      method: 'DELETE'
-    });
+      body: JSON.stringify(newItem)
+    })
+      .then(response => response.json());
+  }
+
+  
+
+  
+
+  function deleteItem(id, updateData){
+    return fetch(
+      `${BASE_URL}/${id}`, 
+      {method : 'DELETE', 
+        headers: {'Content-Type' : 'application/json'},
+        body: JSON.stringify(updateData)
+      });}
+
+
+  return {
+    getItem,
+    createItem,
+    deleteItem
   };
 }());
