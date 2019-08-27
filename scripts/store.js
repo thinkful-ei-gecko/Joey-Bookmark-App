@@ -2,6 +2,7 @@
 let STORE =(function(){
   const addItem = function (object) {
     object.expanded = false;
+    object.visible = true;
     console.log(object);
     this.items.push(object);
   };
@@ -23,27 +24,32 @@ let STORE =(function(){
   };
 
   
+  const filterRating = function(minRating){
+    this.items.forEach(item => {
+      if( item.rating >= minRating){
+        item.visible = true;
+      }
+      else{ item.visible = false;}
+    });
     
+  }
   
   const setError = function(error) {
     this.error=error;
   };
   
+
   
   
   return {
     items: [],
-    filter: 1,
     addItem,
     findById,
     findAndDelete,
-    
-   
     setError,
     toggleExpandFilter,
     findAndUpdate,
-    
-   
+    filterRating,
   };
 
 }())

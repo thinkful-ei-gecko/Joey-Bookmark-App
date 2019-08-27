@@ -6,11 +6,14 @@ const bookmarks = (function(){
     let items = STORE.items;
     $('.bookmarks-list').empty();
     for(let i = 0; i < items.length; i++){
+      if(items[i].visible === false){
+        continue;
+      }
       if(items[i].expanded === false){
         $('.bookmarks-list').append(generateItemElement(items[i]));
       }
       else {
-        $('.bookmarks-list').append(generateExpanded(items[i])) 
+        $('.bookmarks-list').append(generateExpanded(items[i])); 
       }
 
     }
@@ -85,7 +88,15 @@ const bookmarks = (function(){
     } ); 
   }
   
- 
+  function handleFilter(){
+    $('.js-rating-filter').on('submit', event =>{
+      event.preventDefault();
+      console.log('filter');
+      const rating = $('select').val();
+      STORE.filterRating(rating);
+      renderList();
+    });
+  }
   
     
   
@@ -93,6 +104,7 @@ const bookmarks = (function(){
     handleBookmarkCreate();
     handleDeleteBookmark();
     handleExpandItem(); 
+    handleFilter();
   }
 
   return{
