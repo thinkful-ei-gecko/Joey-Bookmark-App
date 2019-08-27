@@ -24,7 +24,7 @@ let STORE =(function(){
     this.error=error;
   };
   function generateItemElement(bookmark){
-    return `<li class="js-bookmark-entry" bookmark-id=${bookmark.id}>
+    return `<li class="js-bookmark-entry" data-bookmark-id=${bookmark.id}>
     <form class="js-bookmark-entry-form">
         <label for="bookmark-entry-form">${bookmark.title}</label>
         <h5>rating: ${bookmark.rating}</h5>

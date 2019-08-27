@@ -36,21 +36,13 @@ const bookmarks = (function(){
         });
     });
   }
-  function detailedView(){
-    $('.bookmarks-list').on('click', '.detailed-view-button', event =>{
-      event.preventDefault();
-      let item = STORE.items;
-      $('js-bookmark-entry-form').html(
-        generateDetails(item)
-      );
-    
-    });}
+  
     
   
   function bindEvent(){
     handleBookmarkCreate();
     handleDeleteBookmark();
-    detailedView();
+    
   }
 
   return{
