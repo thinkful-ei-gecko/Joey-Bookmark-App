@@ -1,7 +1,25 @@
 'use strict';
 const bookmarks = (function(){
+  function generateError(message) {
+    return `
+      <section class="error-content">
+        <button id="cancel-error">X</button>
+        <p>${message}</p>
+      </section>
+    `;
+  }
+  function renderError() {
+    if (STORE.error) {
+      const el = generateError(STORE.error);
+      $('.error-container').html(el);
+    } else {
+      $('.error-container').empty();
+    }
+  }
+
 
   const renderList = function(){
+    renderError();
     //loop through list and render it
     let items = STORE.items;
     $('.bookmarks-list').empty();
@@ -54,7 +72,10 @@ const bookmarks = (function(){
         .then(res => {
           STORE.addItem(res);
           renderList();
-        }); 
+        })
+        .catch((err) => {
+          store.setError(err.message);
+          renderError(); });
     });}
 
   function getItemIdFromElement(item) {
@@ -71,9 +92,9 @@ const bookmarks = (function(){
           STORE.findAndDelete(id);
           renderList();
         })
-        .catch(err=>{
-          STORE.setError(err.message);
-        });
+        .catch((err) => {
+          store.setError(err.message);
+          renderError(); });
     });
   }
 

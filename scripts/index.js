@@ -5,6 +5,7 @@ $(document).ready(function(){
     .then((items)=>{
       items.forEach( item => STORE.addItem(item));
       bookmarks.renderList();
-    });
+    })
+    .catch(err => console.log(err.message));
 });
 

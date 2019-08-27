@@ -5,9 +5,31 @@ const api = (function () {
 
   const BASE_URL = 'https://thinkful-list-api.herokuapp.com/joey/bookmarks';
 
+  const listApiFetch = function(...args) {
+    let error;
+    return fetch(...args)
+      .then(res => {
+        if (!res.ok) {
+          error = { code: res.status };
+          if (!res.headers.get('content-type').includes('json')) {
+            error.message = res.statusText;
+            return Promise.reject(error);
+          }
+        }
+        return res.json();
+      })
+      .then(data => {
+        if (error) {
+          error.message = data.message;
+          return Promise.reject(error);
+        }
+        return data;
+      });
+  };
+
   function getItem() {
-    return fetch(`${BASE_URL}`)
-      .then(res => res.json());
+    return listApiFetch(`${BASE_URL}`)
+      
     
 
   }
@@ -21,37 +43,36 @@ const api = (function () {
     };
   
 
-    return fetch(BASE_URL, {
+    return listApiFetch(BASE_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(newItem)
-    })
-      .then(response => response.json());
+    });
   }
 
 
   const updateItem = function(id, updateData) {
     const newData = JSON.stringify(updateData);
-    return fetch(`${BASE_URL}/${id}`, {
+    return listApiFetch(`${BASE_URL}/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
       body: newData
-    })
-      .then(response => response.json());
+    });
+      
   };
 
 
   function deleteItem(id){
-    return fetch(
+    return listApiFetch(
       `${BASE_URL}/${id}`, 
       {method : 'DELETE', 
         
-      })
-      .then(response => response.json());
+      });
+      
   }
 
 

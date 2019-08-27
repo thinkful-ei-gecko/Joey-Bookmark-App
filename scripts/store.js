@@ -3,7 +3,6 @@ let STORE =(function(){
   const addItem = function (object) {
     object.expanded = false;
     object.visible = true;
-    console.log(object);
     this.items.push(object);
   };
     
@@ -43,6 +42,7 @@ let STORE =(function(){
   
   return {
     items: [],
+    error: null,
     addItem,
     findById,
     findAndDelete,
