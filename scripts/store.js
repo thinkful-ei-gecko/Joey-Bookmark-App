@@ -37,13 +37,7 @@ let STORE =(function(){
     </li>`;
   }
 
-  function generateDetails(bookmark){
-    return `<a href="${bookmark.url}">Visit Website</a>
-        <h5>Description:</h5>
-        <p>${bookmark.desc}</p>
-        <button type="submit" class="detailed-view-button">details</button>
-        <button type="submit" class="delete-button">delete</button>`;
-  }
+  
   return {
     items: [],
     addItem,
@@ -52,7 +46,7 @@ let STORE =(function(){
     renderList,
     generateItemElement,
     setError,
-    generateDetails,
+    
   };
 
 }())
