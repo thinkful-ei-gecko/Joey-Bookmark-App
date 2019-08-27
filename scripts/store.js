@@ -27,14 +27,22 @@ let STORE =(function(){
     return `<li class="js-bookmark-entry" bookmark-id=${bookmark.id}>
     <form class="js-bookmark-entry-form">
         <label for="bookmark-entry-form">${bookmark.title}</label>
-        <h5>rating:${bookmark.rating}</h5>
+        <h5>rating: ${bookmark.rating}</h5>
         <a href="${bookmark.url}">Visit Website</a>
         <h5>Description:</h5>
         <p>${bookmark.desc}</p>
-        <button type="submit" class="detailed-view-button">details</button>
+        <button type="button" class="detailed-view-button">details</button>
         <button type="button" class="delete-button">delete</button>
     </form>
     </li>`;
+  }
+
+  function generateDetails(bookmark){
+    return `<a href="${bookmark.url}">Visit Website</a>
+        <h5>Description:</h5>
+        <p>${bookmark.desc}</p>
+        <button type="submit" class="detailed-view-button">details</button>
+        <button type="submit" class="delete-button">delete</button>`;
   }
   return {
     items: [],
@@ -44,6 +52,7 @@ let STORE =(function(){
     renderList,
     generateItemElement,
     setError,
+    generateDetails,
   };
 
 }())

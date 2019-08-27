@@ -21,8 +21,9 @@ const bookmarks = (function(){
       .data('bookmark-id');
   }
   function handleDeleteBookmark(){
-    $('.js-bookmark-entry-form').on('click', '.delete-button', event =>{
+    $('.bookmarks-list').on('click', '.delete-button', event =>{
       const id = getItemIdFromElement(event.currentTarget);
+      console.log('delete');
       api.deleteItem(id)
         .then(res =>{
           if(res.ok){
@@ -36,14 +37,11 @@ const bookmarks = (function(){
     });
   }
   function detailedView(){
-    $('.js-bookmark-entry-form').on('click', '.detailed-view-button', event =>{
+    $('.bookmarks-list').on('click', '.detailed-view-button', event =>{
       event.preventDefault();
-      $('js-bookmark-entry-form').append(
-        `<a href="${bookmark.url}">Visit Website</a>
-        <h5>Description:</h5>
-        <p>${bookmark.desc}</p>
-        <button type="submit" class="detailed-view-button">details</button>
-        <button type="submit" class="delete-button">delete</button>`
+      let item = STORE.items;
+      $('js-bookmark-entry-form').html(
+        generateDetails(item)
       );
     
     });}
