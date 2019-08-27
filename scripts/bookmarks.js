@@ -74,7 +74,7 @@ const bookmarks = (function(){
           renderList();
         })
         .catch((err) => {
-          store.setError(err.message);
+          STORE.setError(err.message);
           renderError(); });
     });}
 
@@ -93,7 +93,7 @@ const bookmarks = (function(){
           renderList();
         })
         .catch((err) => {
-          store.setError(err.message);
+          STORE.setError(err.message);
           renderError(); });
     });
   }
