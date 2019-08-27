@@ -31,21 +31,34 @@ const api = (function () {
       .then(response => response.json());
   }
 
-  
 
-  
+  const updateItem = function(id, updateData) {
+    const newData = JSON.stringify(updateData);
+    return fetch(`${BASE_URL}/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: newData
+    })
+      .then(response => response.json());
+  };
+
 
   function deleteItem(id){
     return fetch(
       `${BASE_URL}/${id}`, 
       {method : 'DELETE', 
         
-      });}
+      })
+      .then(response => response.json());
+  }
 
 
   return {
     getItem,
     createItem,
-    deleteItem
+    deleteItem,
+    updateItem,
   };
 }());

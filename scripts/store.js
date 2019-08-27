@@ -1,6 +1,8 @@
 'use strict';
 let STORE =(function(){
   const addItem = function (object) {
+    object.expanded = false;
+    console.log(object);
     this.items.push(object);
   };
     
@@ -12,41 +14,36 @@ let STORE =(function(){
     this.items = this.items.filter(item => item.id !== id);
   };
 
-  const renderList = function(){
-    //loop through list and render it
-    let items = STORE.items;
-    for(let i = 0; i < items.length; i++){
-      $('.bookmarks-list').append(generateItemElement(items[i]));
-    }
-    
+  const toggleExpandFilter = function() {
+    this.expanded = !this.expanded;
   };
+  const findAndUpdate = function(id, newData) {
+    const item = this.findById(id);
+    Object.assign(item, newData);
+  };
+
+  
+    
+  
   const setError = function(error) {
     this.error=error;
   };
-  function generateItemElement(bookmark){
-    return `<li class="js-bookmark-entry" data-bookmark-id=${bookmark.id}>
-    <form class="js-bookmark-entry-form">
-        <label for="bookmark-entry-form">${bookmark.title}</label>
-        <h5>rating: ${bookmark.rating}</h5>
-        <a href="${bookmark.url}">Visit Website</a>
-        <h5>Description:</h5>
-        <p>${bookmark.desc}</p>
-        <button type="button" class="detailed-view-button">details</button>
-        <button type="button" class="delete-button">delete</button>
-    </form>
-    </li>`;
-  }
-
+  
+  
   
   return {
     items: [],
+    filter: 1,
     addItem,
     findById,
     findAndDelete,
-    renderList,
-    generateItemElement,
-    setError,
     
+   
+    setError,
+    toggleExpandFilter,
+    findAndUpdate,
+    
+   
   };
 
 }())

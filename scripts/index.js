@@ -4,7 +4,7 @@ $(document).ready(function(){
   api.getItem()
     .then((items)=>{
       items.forEach( item => STORE.addItem(item));
-      STORE.renderList();
+      bookmarks.renderList();
     });
 });
 
