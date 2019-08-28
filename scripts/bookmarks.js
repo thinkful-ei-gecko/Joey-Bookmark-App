@@ -23,6 +23,7 @@ const bookmarks = (function(){
     //loop through list and render it
     let items = STORE.items;
     $('.bookmarks-list').empty();
+    
     for(let i = 0; i < items.length; i++){
       if(items[i].visible === false){
         continue;
